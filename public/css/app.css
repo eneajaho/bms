@@ -32,5 +32,4 @@
 .hoverable:hover{
     box-shadow: 0px 0px 20px 5px #00000059;
     transition: 0.1s ease-in;
-    border: none;
 }

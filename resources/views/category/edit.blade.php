@@ -20,7 +20,7 @@
             @endif
 
 
-            <form method="post" action="/category/{{ $category->id }}">
+            <form method="post" action="/category/{{ $category->id }}" onsubmit="submit.disabled = true; return true;">
                 @method('PATCH')
                 @csrf
 
@@ -33,7 +33,7 @@
                     <input type="text" class="form-control" name="logo" value={{ $category->logo }} required/>
                 </div>
 
-                <button type="submit" class="btn btn-primary"><i class="far fa-edit"></i> Modifiko</button>
+                <button type="submit" name="submit" class="btn btn-primary"><i class="far fa-edit"></i> Modifiko</button>
             </form>
         </div>
     </div>

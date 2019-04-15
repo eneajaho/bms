@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use App\Notification;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -47,6 +48,15 @@ class CategoryController extends Controller
             'category_name'=>'required',
             'logo'=> 'required',
         ]));
+
+        Notification::create([
+            'name'=>'U shtua një kategori e re',
+            'description'=> 'U shtua kategoria: ' . $request->input('category_name'),
+            'visible'=>true,
+            'type'=>'category',
+            'user_id'=> '1',
+//            using user_id = 1 for the moment
+        ]);
 
         return redirect('/category');
     }

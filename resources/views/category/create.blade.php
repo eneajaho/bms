@@ -20,18 +20,27 @@
                 </div><br />
             @endif
 
-            <form method="post" action="/category">
+            <form method="post" action="/category" onsubmit="submit.disabled = true; return true;">
                 @csrf
-                <div class="form-group">
-                    <label for="name">Emri i kategorisë:</label>
-                    <input type="text" class="form-control" name="category_name" required/>
-                </div>
-                <div class="form-group">
-                    <label for="name">Logo:</label>
-                    <input type="text" class="form-control" name="logo" required/>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Emri i kategorisë:</label>
+                            <input type="text" class="form-control" name="category_name" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Logo:</label>
+                            <input type="text" class="form-control" name="logo" required/>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Shto</button>
+
+
+
+                <button type="submit" name="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Shto</button>
             </form>
         </div>
     </div>

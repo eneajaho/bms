@@ -19,6 +19,10 @@
 Route::resource('products', 'ProductsController');
 Route::resource('tables', 'TablesController');
 Route::resource('category', 'CategoryController');
+Route::resource('notification', 'NotificationController');
+Route::resource('orders', 'OrderController');
+
+
 
 
 Route::get('/magazina', 'ProductsController@index');

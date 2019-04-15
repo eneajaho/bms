@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
+use App\Notification;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -45,9 +46,22 @@ class ProductsController extends Controller
         Product::create($request->validate([
             'product_name'=>'required',
             'category_id'=> 'required',
-            'product_price'=> 'required|integer',
-            'product_qty' => 'required|integer'
+            'price'=> 'required|integer',
+            'quantity' => 'required|integer',
+            'unit' => 'required',
+            'barcode'=>'required|integer',
+
         ]));
+
+
+        Notification::create([
+            'name'=>'U shtua një produkt i ri',
+            'description'=> 'U shtua produkti: ' . $request->input('product_name'),
+            'visible'=>true,
+            'type'=>'product',
+            'user_id'=> '1',
+//            using user_id = 1 for the moment
+        ]);
 
         return redirect('/products');
     }
@@ -90,9 +104,11 @@ class ProductsController extends Controller
     {
         $product->update($request->validate([
             'product_name'=>'required',
-            'category_id'=>'required',
-            'product_price'=> 'required|integer',
-            'product_qty' => 'required|integer'
+            'category_id'=> 'required',
+            'price'=> 'required|integer',
+            'quantity' => 'required|integer',
+            'unit' => 'required',
+            'barcode'=>'required|integer',
         ]));
 
         return redirect('/products')->with('success', 'Stock has been updated');

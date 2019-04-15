@@ -20,7 +20,7 @@
                 </div><br />
             @endif
 
-            <form method="post" action="/tables">
+            <form method="post" action="/tables" onsubmit="submit.disabled = true; return true;">
                 @csrf
                 <div class="form-group">
                     <label for="name">Tavolina:</label>
@@ -31,7 +31,7 @@
                     <input type="number" class="form-control" name="table_size" required/>
                 </div>
 
-                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Shto</button>
+                <button type="submit" name="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Shto</button>
             </form>
         </div>
     </div>

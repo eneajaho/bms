@@ -11,7 +11,17 @@
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
-
+            <li class="nav-item dropdown show">
+                <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <i class="ni ni-bell-55"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right show" aria-labelledby="navbar-default_dropdown_1">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media align-items-center">
@@ -65,8 +75,13 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/">
                         <i class="ni ni-tv-2 text-primary"></i> Kryefaqe
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders">
+                        <i class="fas fa-shopping-cart text-green"></i> Porosi
                     </a>
                 </li>
                 <li class="nav-item">
@@ -81,12 +96,17 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/category">
-                        <i class="fas fa-bars text-orange"></i> Kategori
+                        <i class="fas fa-bars text-default"></i> Kategori
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/raports">
                         <i class="fas fa-chart-line text-yellow"></i> Raportet
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/notification">
+                        <i class="far fa-bell text-warning"></i> Njoftime
                     </a>
                 </li>
 

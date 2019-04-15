@@ -152,6 +152,7 @@
             </div>
         </div>
     </div>
+
     <!-- Page content -->
     <div class="container-fluid mt--7">
 
