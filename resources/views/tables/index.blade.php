@@ -12,17 +12,19 @@
                     <div class="card hoverable">
                         <div class="rounded-circle mt-2  m-auto tables-icon d-flex justify-content-center align-content-center align-items-center">
                             <i class="fas fa-utensils"></i>
-                            <span class="table-size bg-primary" data-toggle="tooltip" data-placement="top" title="{{ $table->table_size }} vende">{{ $table->table_size }}</span>
+                            <span class="table-size {{$table->free ? 'bg-success' : 'bg-red'}}" data-toggle="tooltip" data-placement="top" title="{{$table->free ? 'E lirë' : 'E zënë'}}"></span>
                         </div>
                         <div class="card-body">
                             <h3 class="card-title text-center">{{ $table->table_name }}</h3>
                             <div class="d-flex flex-wrap justify-content-center">
                                 <a href="/tables/{{ $table->id }}/edit" class="btn btn-primary mb-2"><i class="far fa-edit"></i> Modifiko</a>
+                                @if($table->free)
                                 <form action="/tables/{{ $table->id }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit"><i class="far fa-trash-alt"></i> Fshi</button>
                                 </form>
+                                    @endif
                             </div>
 
                         </div>

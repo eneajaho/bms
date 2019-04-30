@@ -19,6 +19,7 @@ class CreateOrderDetailsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('price');
             $table->unsignedInteger('quantity');
+            $table->unsignedInteger('discount')->default(0);
             $table->timestamps();
         });
     }

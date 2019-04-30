@@ -27,3 +27,10 @@ Route::resource('orders', 'OrderController');
 
 Route::get('/magazina', 'ProductsController@index');
 Route::get('/', 'ProductsController@index');
+
+
+// furnizon produktin
+Route::patch('products/{product}/add', 'ProductsController@add');
+
+// paguaj porosine
+Route::patch('orders/{order}/pay', 'OrderController@pay');

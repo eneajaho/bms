@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('category_name');
             $table->string('logo')->default('fas fa-plus');
+            $table->string('color')->default('primary');
             $table->timestamps();
         });
     }

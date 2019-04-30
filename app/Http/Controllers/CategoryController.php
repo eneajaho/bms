@@ -47,6 +47,7 @@ class CategoryController extends Controller
         Category::create($request->validate([
             'category_name'=>'required',
             'logo'=> 'required',
+            'color'=> 'required',
         ]));
 
         Notification::create([
@@ -97,6 +98,7 @@ class CategoryController extends Controller
         $category->update($request->validate([
             'category_name'=>'required',
             'logo'=> 'required',
+            'color'=>'required',
         ]));
 
         return redirect('/category');

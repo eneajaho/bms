@@ -1,6 +1,3 @@
-
-
-
 .tables-icon{
     font-size: 50px;
     text-align: center;
@@ -30,6 +27,80 @@
     box-shadow: 0px 0px 20px 5px #0000001c;
 }
 .hoverable:hover{
-    box-shadow: 0px 0px 20px 5px #00000059;
-    transition: 0.1s ease-in;
+    box-shadow: 0px 0px 20px 5px #0000003b;
+    transition: 0.15s ease-in;
+}
+
+.hover{
+
+}
+
+.btn-responsive {
+    white-space: normal !important;
+    word-wrap: break-word;
+}
+
+/*Order Details*/
+.order-details{
+    width:100%;
+}
+
+.order-details > th{
+    padding: 10px 10px!important;
+    background: #80808021;
+    color: #000;
+    text-align: center;
+}
+.order-details > td{
+    padding: 10px!important;
+    text-align: center;
+    white-space: normal;
+    transition: 0.1s ease-out;
+
+}
+
+.order-details:hover td{
+    background: #eeeeee73;
+    cursor: pointer;
+    color: #000;
+
+}
+
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.table td, .table th {
+     white-space: normal;
+}
+
+
+
+/*Product Details*/
+
+
+
+.product-details{
+    width:100%;
+}
+
+.product-details > th:first-child td{
+    padding: 10px 10px!important;
+    background: #80808021;
+    color: #000;
+    text-align: center;
+}
+.product-details > td{
+    padding: 10px!important;
+    text-align: center;
+    white-space: normal;
+    transition: 0.1s ease-out;
+}
+
+.product-details:hover td{
+    background: #eeeeee73;
+    cursor: pointer;
+    color: #000;
+
 }

@@ -22,13 +22,19 @@
 
             <form method="post" action="/tables" onsubmit="submit.disabled = true; return true;">
                 @csrf
-                <div class="form-group">
-                    <label for="name">Tavolina:</label>
-                    <input type="text" class="form-control" name="table_name" required/>
-                </div>
-                <div class="form-group">
-                    <label for="name">Madhësia:</label>
-                    <input type="number" class="form-control" name="table_size" required/>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="name">Tavolina:</label>
+                            <input type="text" class="form-control" name="table_name" required/>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="name">Madhësia:</label>
+                            <input type="number" class="form-control" name="table_size" required/>
+                        </div>
+                    </div>
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Shto</button>

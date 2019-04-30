@@ -26,11 +26,10 @@ class OrderController extends Controller
             'Esli',
         ];
 
-        $orders = Order::with('orderDetails.product.category')->get();
-        $tables = Table::all();
+        $orders = Order::with('table', 'orderDetails.product.category')->get();
+//        $tables = Table::all();
 
-        return view('order.index', compact('tables', 'users', 'orders'));
-
+        return view('order.index', compact( 'users', 'orders'));
     }
 
     /**
@@ -40,7 +39,6 @@ class OrderController extends Controller
      */
     public function create()
     {
-
         $users = [
             'Enea',
             'Geni',
@@ -52,7 +50,6 @@ class OrderController extends Controller
         $products = Product::all();
 
         return view('order.create', compact('products', 'categories', 'tables', 'users'));
-
     }
 
     /**
@@ -63,20 +60,31 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+
         $order = Order::create($request->validate([
             'user_id'=>'required|integer',
             'table_id'=>'required|integer',
         ]));
 
-        $product_id = $request->input('product_id');
-        $quantity = $request->input('quantity');
-        $product = Product::where('id', '=', $product_id)->first();
 
-        OrderDetails::create([
-            'order_id' => $order->id,
-            'product_id' => $product_id,
-            'quantity' => $request->input('quantity'),
-            'price' => $product->price * $quantity,
+        $data = $request->all();
+
+        foreach ($data['product_id'] as $key => $product_id){
+            $quantity = $data['quantity'][$key];
+            $product = Product::where('id', '=', $product_id)->first();
+
+            OrderDetails::create([
+                'order_id' => $order->id,
+                'product_id' => $product_id,
+                'quantity' => $quantity,
+                'discount'=> 0,
+                'price' => $product->selling_price_per_unit * $quantity,
+            ]);
+        }
+
+        $table = Table::where('id', '=', $request->table_id)->first();
+        $table->update([
+            'free' => false,
         ]);
 
 
@@ -91,11 +99,9 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        $order = Order::first();
 
-//
-//        $order = Order::first();
-//
-//        dd($order);
+        dd($order);
     }
 
     /**
@@ -107,12 +113,9 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
 
-
 //        $categories = Category::all();
 //        $product = Product::findOrFail($product->id);
 //        $category = $product->category;
-//
-//
 //        return view('warehouse.edit', compact('product', 'categories', 'category'));
 
     }
@@ -133,7 +136,7 @@ class OrderController extends Controller
 //            'product_qty' => 'required|integer'
 //        ]));
 //
-//        return redirect('/products')->with('success', 'Stock has been updated');
+//        return redirect('/products');
 
     }
 
@@ -149,5 +152,19 @@ class OrderController extends Controller
 //        $product->delete();
 //        return redirect('/products');
 
+    }
+
+    public function pay(Order $order)
+    {
+        $order = Order::findOrFail($order->id);
+        $order->update([
+            'completed' => true,
+        ]);
+
+        $table = Table::where('id', '=', $order->table->id)->first();
+        $table->update([
+            'free' => true,
+        ]);
+        return redirect()->back();
     }
 }

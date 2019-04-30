@@ -24,13 +24,19 @@
                 @method('PATCH')
                 @csrf
 
-                <div class="form-group">
-                    <label for="name">Tavolina:</label>
-                    <input type="text" class="form-control" name="table_name" value={{ $table->table_name }} required/>
-                </div>
-                <div class="form-group">
-                    <label for="name">Madhësia:</label>
-                    <input type="number" class="form-control" name="table_size" value={{ $table->table_size }} required/>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="name">Tavolina:</label>
+                            <input type="text" class="form-control" name="table_name" value="{{ $table->table_name }}" required/>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="name">Madhësia:</label>
+                            <input type="number" class="form-control" name="table_size" value="{{ $table->table_size }}" required/>
+                        </div>
+                    </div>
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary"><i class="far fa-edit"></i> Modifiko</button>

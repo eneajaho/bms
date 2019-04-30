@@ -16,11 +16,7 @@ class ProductsController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::all();
-
-//        $product = Product::first();
-//        dd($product->category->category_name);
-
+        $products = Product::with('category')->paginate(50);
         return view('warehouse.index', compact('products', 'categories'));
     }
 
@@ -31,8 +27,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('warehouse.create')->withCategories($categories);
+        return view('warehouse.create')->withCategories(Category::all());
     }
 
     /**
@@ -46,23 +41,22 @@ class ProductsController extends Controller
         Product::create($request->validate([
             'product_name'=>'required',
             'category_id'=> 'required',
-            'price'=> 'required|integer',
-            'quantity' => 'required|integer',
+            'buying_price_per_unit'=> 'required|numeric',
+            'quantity'=> 'required|numeric',
+            'selling_price_per_unit'=> 'required|numeric',
+            'tax'=> 'required|numeric',
             'unit' => 'required',
-            'barcode'=>'required|integer',
-
+            'barcode'=>'required|numeric',
         ]));
 
-
-        Notification::create([
-            'name'=>'U shtua një produkt i ri',
-            'description'=> 'U shtua produkti: ' . $request->input('product_name'),
-            'visible'=>true,
-            'type'=>'product',
-            'user_id'=> '1',
-//            using user_id = 1 for the moment
-        ]);
-
+//        Notification::create([
+//            'name'=>'U shtua një produkt i ri',
+//            'description'=> 'U shtua produkti: ' . $request->input('product_name'),
+//            'visible'=>true,
+//            'type'=>'product',
+//            'user_id'=> '1',
+////            using user_id = 1 for the moment
+//        ]);
         return redirect('/products');
     }
 
@@ -74,7 +68,9 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $product = Product::findOrFail($product->id);
+
+        return view('warehouse.show', compact('product'));
     }
 
     /**
@@ -89,8 +85,7 @@ class ProductsController extends Controller
         $product = Product::findOrFail($product->id);
         $category = $product->category;
 
-
-        return view('warehouse.edit', compact('product', 'categories', 'category'));
+        return view('warehouse.edit', compact('categories','product', 'category'));
     }
 
     /**
@@ -105,13 +100,15 @@ class ProductsController extends Controller
         $product->update($request->validate([
             'product_name'=>'required',
             'category_id'=> 'required',
-            'price'=> 'required|integer',
-            'quantity' => 'required|integer',
+            'buying_price_per_unit'=> 'required|numeric',
+            'quantity'=> 'required|numeric',
+            'selling_price_per_unit'=> 'required|numeric',
+            'tax'=> 'required|numeric',
             'unit' => 'required',
-            'barcode'=>'required|integer',
+            'barcode'=>'required|numeric',
         ]));
 
-        return redirect('/products')->with('success', 'Stock has been updated');
+        return redirect('/products');
     }
 
     /**
@@ -126,5 +123,17 @@ class ProductsController extends Controller
         $product->delete();
         return redirect('/products');
 
+    }
+
+
+    public function add(Request $request, Product $product)
+    {
+        $product = Product::findOrFail($product->id);
+        $current_quantity = $product->quantity;
+        $quantity_to_add = $request->input('add_quantity');
+        $product->update([
+            'quantity'=> $current_quantity + $quantity_to_add,
+        ]);
+        return redirect()->back();
     }
 }

@@ -15,7 +15,6 @@ class TablesController extends Controller
     public function index()
     {
         $tables = Table::all();
-
         return view('tables.index', compact('tables'));
     }
 
@@ -65,7 +64,6 @@ class TablesController extends Controller
     public function edit(Table $table)
     {
         $table = Table::findOrFail($table->id);
-
         return view('tables.edit', compact('table'));
     }
 
@@ -82,7 +80,6 @@ class TablesController extends Controller
             'table_name'=>'required',
             'table_size'=> 'required|integer',
         ]));
-//        ->with('success', 'Stock has been updated')
         return redirect('/tables');
 
     }
